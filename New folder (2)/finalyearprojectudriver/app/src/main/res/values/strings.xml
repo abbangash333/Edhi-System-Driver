@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">finalyearprojectu</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="account_text">Don\'t have account?</string>
+    <string name="upload_picture">upload picture</string>
+    <string name="confirm_registration">SIGN UP</string>
+    <string name="title_activity_buttom_navigation">ButtomNavigation</string>
+    <string name="title_missing">Missing Posts</string>
+    <string name="title_blood">Blood Posts</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contact_centerArray">ListViewForContactCenter</string>
+    <string name="_8942">⋮</string>
+    <string name="please_enter_phone_number_for_verification">Please enter phone number for verification</string>
+    <string name="countey_code">+92</string>
+    <string name="verify_your_number">Verify Your Number</string>
+    <string name="your_phone_number">Your Phone Number</string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="working">Working . . .</string>
+    <string name="todo">TODO</string>
+    <string name="google_maps_api">AIzaSyC7aO2ri5wsZEBhI3iqm70A1-m7vTYmehg</string>
+    <string-array name="array_technology">
+        <item>Peshawar</item>
+        <item>Kohat</item>
+        <item>Hangu</item>
+        <item>Thall</item>
+        <item>Parachinar</item>
+        <item>Karak</item>
+        <item>Charsadda</item>
+        <item>Bannu</item>
+        <item>Swat</item>
+        <item>Lucky Marwat</item>
+        <item>Dera Ismail Khan</item>
+        <item>Noshehra</item>
+        <item>Abbot Abad</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
+</resources>
+
