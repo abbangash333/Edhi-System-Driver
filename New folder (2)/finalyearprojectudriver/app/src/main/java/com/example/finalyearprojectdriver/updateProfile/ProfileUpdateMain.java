@@ -131,6 +131,7 @@ public class ProfileUpdateMain extends AppCompatActivity implements View.OnClick
         String uName = userName.getText().toString().trim();
         String uEmail = userEmail.getText().toString();
         String cityUpdate = city.getText().toString().trim();
+        String Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String getId = fAuthUpdate.getInstance().getCurrentUser().getUid();
         StorageReference storageReference2 = stReferenceUpdate.child(getId + "." + GetFileExtension(FilePathUri));
         storageReference2.putFile(FilePathUri)
@@ -148,7 +149,7 @@ public class ProfileUpdateMain extends AppCompatActivity implements View.OnClick
                             @Override
                             public void onSuccess(Uri uri) {
                                 Uri downloadUrl = uri;
-                                UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, downloadUrl.toString(), cityUpdate);
+                                UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, downloadUrl.toString(), cityUpdate,"true",Id);
                                 Log.d("mes", "we are in just above uploading method");
                                 databaseReference.child(getId).setValue(imageUploadInfo);
                                 Toast.makeText(getApplicationContext(), "Data Updated successfully", Toast.LENGTH_SHORT).show();
@@ -186,7 +187,7 @@ public class ProfileUpdateMain extends AppCompatActivity implements View.OnClick
         String uEmail = userEmail.getText().toString();
         String cityUpdate = city.getText().toString().trim();
         String getId = fAuthUpdate.getInstance().getCurrentUser().getUid();
-        UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, url, cityUpdate);
+        UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, cityUpdate,"true",getId);
         Log.d("mes", "we are in just above uploading method");
         databaseReference.child(getId).setValue(imageUploadInfo);
         Toast.makeText(getApplicationContext(), "Your Data updated", Toast.LENGTH_SHORT).show();
@@ -234,11 +235,11 @@ public class ProfileUpdateMain extends AppCompatActivity implements View.OnClick
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String pName = dataSnapshot.child("display_name").getValue(String.class);
-                String pUserEmail = dataSnapshot.child("email").getValue(String.class);
+                String pName = dataSnapshot.child("driver_name").getValue(String.class);
+                String pUserEmail = dataSnapshot.child("phone_number").getValue(String.class);
                 String pPhotoUrl = dataSnapshot.child("photo_url").getValue(String.class);
                 url = pPhotoUrl;
-                String pCity = dataSnapshot.child("city_name").getValue(String.class);
+                String pCity = dataSnapshot.child("city").getValue(String.class);
                 Picasso.get().load(pPhotoUrl).into(imageView);
                 userName.setText(pName);
                 userEmail.setText(pUserEmail);

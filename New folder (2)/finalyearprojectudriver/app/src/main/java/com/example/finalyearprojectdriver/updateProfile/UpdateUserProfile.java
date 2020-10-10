@@ -1,35 +1,35 @@
 package com.example.finalyearprojectdriver.updateProfile;
 
 public class UpdateUserProfile {
-    public String display_name;
-    public String email;
-    public String photo_url;
-    public String city_name;
+    String driver_name;
+    String city;
+    String photo_url;
+    String phone_number;
 
     public UpdateUserProfile() {
     }
 
-    public UpdateUserProfile(String display_name, String email, String photo_url, String city_name) {
-        this.display_name = display_name;
-        this.email = email;
+    public UpdateUserProfile(String driver_name, String city, String photo_url, String phone_number) {
+        this.driver_name = driver_name;
+        this.city = city;
         this.photo_url = photo_url;
-        this.city_name = city_name;
+        this.phone_number = phone_number;
     }
 
-    public String getDisplay_name() {
-        return display_name;
+    public String getDriver_name() {
+        return driver_name;
     }
 
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCity() {
+        return city;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPhoto_url() {
@@ -40,11 +40,11 @@ public class UpdateUserProfile {
         this.photo_url = photo_url;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 }

@@ -1,40 +1,31 @@
 package com.example.finalyearprojectdriver.ambulance;
 
 public class location {
-    String lati;
-    String longti;
-    String available;
+    Double lati;
+    Double longi;
+
 
     public location() {
     }
 
-    public location(String lati, String longti, String available) {
+    public location(Double lati, Double longi) {
         this.lati = lati;
-        this.longti = longti;
-        this.available = available;
+        this.longi = longi;
     }
 
-    public String getLati() {
+    public Double getLati() {
         return lati;
     }
 
-    public void setLati(String lati) {
+    public void setLati(Double lati) {
         this.lati = lati;
     }
 
-    public String getLongti() {
-        return longti;
+    public Double getLongi() {
+        return longi;
     }
 
-    public void setLongti(String longti) {
-        this.longti = longti;
-    }
-
-    public String getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setLongi(Double longi) {
+        this.longi = longi;
     }
 }

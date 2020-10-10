@@ -1,35 +1,41 @@
 package com.example.finalyearprojectdriver.signUp;
 
 public class UploadUserInfo {
-    public String display_name;
-    public String email;
+    public String driver_name;
+    public String phone_number;
     public String photo_url;
-    public String city_name;
+    public String city;
+    public String is_available;
+    public String ambulance_key;
 
-    public UploadUserInfo() {
+    public UploadUserInfo(String uName, String uEmail, String cityUpdate, String aTrue, String getId) {
     }
 
-    public UploadUserInfo(String display_name, String email, String photo_url, String city_name) {
-        this.display_name = display_name;
-        this.email = email;
+    public UploadUserInfo(String driver_name,
+                          String phone_number, String photo_url,
+                          String city, String is_available, String ambulance_key) {
+        this.driver_name = driver_name;
+        this.phone_number = phone_number;
         this.photo_url = photo_url;
-        this.city_name = city_name;
+        this.city = city;
+        this.is_available = is_available;
+        this.ambulance_key = ambulance_key;
     }
 
-    public String getDisplay_name() {
-        return display_name;
+    public String getDriver_name() {
+        return driver_name;
     }
 
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getPhoto_url() {
@@ -40,12 +46,27 @@ public class UploadUserInfo {
         this.photo_url = photo_url;
     }
 
-    public String getCity_name() {
-        return city_name;
+    public String getCity() {
+        return city;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setCity(String city) {
+        this.city = city;
     }
 
+    public String getIs_available() {
+        return is_available;
+    }
+
+    public void setIs_available(String is_available) {
+        this.is_available = is_available;
+    }
+
+    public String getAmbulance_key() {
+        return ambulance_key;
+    }
+
+    public void setAmbulance_key(String ambulance_key) {
+        this.ambulance_key = ambulance_key;
+    }
 }

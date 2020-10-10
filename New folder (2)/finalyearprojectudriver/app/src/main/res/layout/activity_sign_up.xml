@@ -62,10 +62,10 @@ tools:context="com.example.finalyearprojectdriver.logIn.LogIn">
         android:layout_margin="10dp"
         android:background="@drawable/rounded_corner"
         android:drawableLeft="@drawable/lock_24_"
-        android:hint="Email"
+        android:hint="phone number"
         android:drawablePadding="10dp"
         android:paddingLeft="8dp"
-        android:inputType="textEmailAddress"/>
+        android:inputType="phone"/>
     <ProgressBar
         android:id="@+id/sign_up_progress_bar"
         android:layout_width="wrap_content"

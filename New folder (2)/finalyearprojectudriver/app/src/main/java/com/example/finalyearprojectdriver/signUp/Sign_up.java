@@ -113,8 +113,8 @@ public class Sign_up extends AppCompatActivity {
             String uName = userName.getText().toString().trim();
             String uEmail = userEmail.getText().toString();
             String city = cityOfPerson.getText().toString().trim();
-            String getId = firebaseAuth.getInstance().getCurrentUser().getUid();
-            StorageReference storageReference2 = storageReference.child(getId + "." + GetFileExtension(FilePathUri));
+            String Id = firebaseAuth.getInstance().getCurrentUser().getUid();
+            StorageReference storageReference2 = storageReference.child(Id + "." + GetFileExtension(FilePathUri));
             storageReference2.putFile(FilePathUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         // On success will be called when the process completed successfully
@@ -135,9 +135,9 @@ public class Sign_up extends AppCompatActivity {
 
 //                                    UploadUserInfo imageUploadInfo = new UploadUserInfo(uName,uEmail, downloadUrl.toString());
                                                           //String ImageUploadId = databaseReference.push().getKey();
-                                                          UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, downloadUrl.toString(), city);
+                                                          UploadUserInfo imageUploadInfo = new UploadUserInfo(uName, uEmail, downloadUrl.toString(), city,"true",Id);
                                                           Log.d("mes", "we are in just above uploading method");
-                                                          databaseReference.child("ambulances").child(getId).setValue(imageUploadInfo);
+                                                          databaseReference.child("ambulances").child(Id).setValue(imageUploadInfo);
 
                                                       }
                                                   });
@@ -199,7 +199,7 @@ public class Sign_up extends AppCompatActivity {
 
     //this will be used for checking of avalaibility
     public boolean checkFields() {
-        if (userEmail.getText().toString().isEmpty() || userEmail.getText().toString().length() < 6) {
+        if (userEmail.getText().toString().isEmpty() || userEmail.getText().toString().length() < 11) {
             Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_SHORT).show();
             return false;
         }

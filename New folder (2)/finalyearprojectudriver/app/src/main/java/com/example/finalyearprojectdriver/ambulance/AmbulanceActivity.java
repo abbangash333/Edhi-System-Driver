@@ -1,6 +1,7 @@
 package com.example.finalyearprojectdriver.ambulance;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -54,6 +56,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,7 +66,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.util.List;
 
-public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class AmbulanceActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
 
     private static final String TAG = "MapsActivity";
     private GoogleMap mMap;
@@ -78,6 +81,9 @@ public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCal
     Circle userLocationAccuracyCircle;
     private String available;
     View mapView;
+    Intent intent;
+    Button btn;
+
 
     @SuppressLint("MissingPermission")
     @Override
@@ -98,6 +104,17 @@ public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCal
         locationRequest.setInterval(500);
         locationRequest.setFastestInterval(500);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        RelativeLayout button = findViewById(R.id.map_relative);
+
+        btn = button.findViewById(R.id.btn_find);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UserMap.class);
+                startActivity(intent);
+            }
+        });
+        getNotification();
     }
 
     /**
@@ -173,7 +190,7 @@ public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCal
             }
         }
     };
-
+// this will make the location marker
     private void setUserLocationMarker(Location location) {
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -290,17 +307,24 @@ public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCal
         }
         return super.onOptionsItemSelected(item);
     }
-
+// this will upload our coordinate to firebase
     @Override
     public void onLocationChanged(Location location) {
-        String lati, longti;
+        Double lati, longti;
         available = String.valueOf(true);
-        lati = Double.toString(location.getLatitude());
-        longti = Double.toString(location.getLatitude());
-        location location1 = new location(lati,longti,available);
+        lati = location.getLatitude();
+        longti = location.getLongitude();
+        location location1 = new location(lati,longti);
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("ambulances").child(id);
         databaseReference1.child("location").setValue(location1).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+        DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference("locations");
+        dataBase.child(id).setValue(location1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -322,5 +346,54 @@ public class AmbulanceActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+    public void getNotification(){
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("notifications").child(id);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             String lati = String.valueOf(dataSnapshot.child("lati"));
+             String longi = String.valueOf(dataSnapshot.child("longi"));
+             intent = new Intent(getApplicationContext(),UserMap.class);
+             intent.putExtra("lati",lati);
+             intent.putExtra("longi",longi);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            NotificationHelper notificationHelper = new NotificationHelper(getApplicationContext());
+            notificationHelper.sendHighPriorityNotification("User Help","User need Ambulance",UserMap.class);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

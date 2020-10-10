@@ -32,8 +32,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_api" />
+
+        <activity
+            android:name=".ambulance.UserMap"
+            android:label="@string/title_activity_user_map"></activity>
         <activity android:name=".ambulance.PermissionActivity" />
-        <activity android:name=".ambulance.AmbulanceActivity"></activity>
+        <activity android:name=".ambulance.AmbulanceActivity" />
         <activity
             android:name=".logIn.OtpPattern.OtpActivity"
             android:parentActivityName=".logIn.logInPattern.view.LogInActivity" />
